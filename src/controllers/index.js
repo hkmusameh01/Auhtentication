@@ -1,5 +1,5 @@
-const handleLoginFile = require('./handleLoginFile');
-const handleSignupFile = require('./handleSignupFile')
-const signup = require('./signup')
+const { handleLoginFile, handleSignupFile, handleWelcomePage, verifyTokenMiddleWare } = require("./handleFiles");
+const signup = require("./signup");
+const login = require("./login");
 
-module.exports = {handleLoginFile, handleSignupFile, signup};
+module.exports = { handleLoginFile, handleSignupFile, handleWelcomePage, verifyTokenMiddleWare, signup, login };

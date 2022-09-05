@@ -1,3 +1,4 @@
 const insertUserInfo = require("./insertUserInfo");
+const selectUserByEmail = require('./selectUserByEmail');
 
-module.exports = { insertUserInfo };
+module.exports = { insertUserInfo, selectUserByEmail };

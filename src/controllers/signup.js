@@ -1,36 +1,41 @@
-const Joi = require("joi");
 const bcrypt = require("bcrypt");
 
-const { insertUserInfo } = require("../database/queries");
-
-const schema = Joi.object({
-  username: Joi.string().alphanum().required(),
-  password: Joi.string()
-    .min(4)
-    .required(),
-  email: Joi.string().email({ minDomainSegments: 2, separator: "." }),
-});
+const { insertUserInfo, selectUserByEmail } = require("../database/queries");
+const { signupSchema } = require("../validation");
+const { generateToken } = require("../promise");
 
 const signup = (req, res) => {
-  schema
+  const { password } = req.body;
+  signupSchema
     .validateAsync(req.body)
-    .then((data) => hashPassword(data.password))
-    .then((hasedPassword) =>
-      insertUserInfo({
-        password: hasedPassword,
-        email: req.body.email,
-        username: req.body.username,
-      })
-    )
-    .catch((err) => console.log("err: " + err));
-};
-
-// returned a promise contains hased password;
-const hashPassword = (password) => {
-  return bcrypt
-    .genSalt(10)
-    .then((salt) => bcrypt.hash(password, salt))
-    .catch((err) => console.log("err: " + err));
+    .then((data) => selectUserByEmail(data.email))
+    .then((user) => {
+      if (user.rowCount) {
+        res.status(409).send({ msg: "Email already exist!" });
+      } else {
+        bcrypt.hash(password, 10).then((hasedPassword) =>
+          insertUserInfo({
+            password: hasedPassword,
+            email: req.body.email,
+            username: req.body.username,
+          }).then((data) => {
+            const { username, id } = data.rows[0];
+            generateToken({ username, id }, process.env.SECRET_KEY, {
+              algorithm: "HS256",
+            }).then((token) => {
+              res
+                .cookie("token", token)
+                .status(201)
+                .send({ msg: "User Created successfully" });
+            });
+          })
+        );
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ msg: "Something goes wrong with signup" });
+    });
 };
 
 module.exports = signup;

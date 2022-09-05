@@ -1,11 +1,24 @@
-const {join} = require('path')
-const {handleLoginFile, handleSignupFile, signup} = require('../controllers')
-const router = require('express').Router();
+const { join } = require("path");
 
-router.get('/login', handleLoginFile)
+const {
+  handleLoginFile,
+  handleSignupFile,
+  signup,
+  login,
+  handleWelcomePage,
+  verifyTokenMiddleWare,
+} = require("../controllers");
 
-router.get('/register', handleSignupFile)
+const router = require("express").Router();
 
-router.post('/register', signup)
+router.get("/login", handleLoginFile);
+
+router.get("/register", handleSignupFile);
+
+router.post("/register", signup);
+
+router.post("/login", login);
+
+router.get('/welcome', verifyTokenMiddleWare,  handleWelcomePage)
 
 module.exports = router;
