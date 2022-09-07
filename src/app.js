@@ -13,13 +13,6 @@ app.use(cookieParser());
 
 app.use(express.static(join(__dirname, "..", "public")));
 
-app.use(express.static(join(__dirname, "..", "private")));
-
-// app.use((req, res, next) => {
-//   console.log(req.cookies.token)
-//   next();
-// })
-
 app.use(routes);
 
 module.exports = app;

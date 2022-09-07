@@ -1,4 +1,4 @@
-const { join } = require("path");
+const router = require("express").Router();
 
 const {
   handleLoginFile,
@@ -7,18 +7,19 @@ const {
   login,
   handleWelcomePage,
   verifyTokenMiddleWare,
+  userInfo,
 } = require("../controllers");
 
-const router = require("express").Router();
+router.get("/login", handleLoginFile); // tested
 
-router.get("/login", handleLoginFile);
+router.get("/register", handleSignupFile); // tested
 
-router.get("/register", handleSignupFile);
+router.post("/register", signup); // tested
 
-router.post("/register", signup);
+router.post("/login", login); // tested
 
-router.post("/login", login);
+router.get("/hello", verifyTokenMiddleWare, handleWelcomePage);
 
-router.get('/welcome', verifyTokenMiddleWare,  handleWelcomePage)
+router.get("/userInfo", verifyTokenMiddleWare, userInfo);
 
 module.exports = router;

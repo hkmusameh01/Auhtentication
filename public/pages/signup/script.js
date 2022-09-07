@@ -47,15 +47,15 @@ signUpBtn.addEventListener("click", (e) => {
     }),
   })
     .then((data) => {
-      console.log(data.status);
+      // console.log(data.status);
       if(data.status >= 200 && data.status < 300) {
-        window.location = '/welcome'
+        window.location = '/welcomeeee'
       } else {
         return data.json()
       }
     })
     .then((data) => alert(data.msg))
     .catch((err) => {
-      console.log("err" + err);
+      console.log(err);
     });
 });

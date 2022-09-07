@@ -29,7 +29,7 @@ const login = (req, res) => {
                     .status(201)
                     .send({ msg: "Token generated successfully" })
                 )
-                .catch((err) => console.log("generatingToken err: " + err));
+                .catch((err) => console.log(err));
             }
           })
           .catch((err) => res.send(err));

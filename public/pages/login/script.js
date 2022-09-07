@@ -36,7 +36,7 @@ logInBtn.addEventListener("click", (e) => {
   fetch("/login", options)
     .then(data => {
       if(data.status >= 200 && data.status < 300) {
-          window.location = '/welcome';
+          window.location = '/hello';
       } else {
         return data.json();
       }
@@ -44,5 +44,5 @@ logInBtn.addEventListener("click", (e) => {
     .then(data => {
       alert(data.msg)
     })
-    .catch((err) => console.log("err" + err));
+    .catch((err) => console.log(err));
 });
