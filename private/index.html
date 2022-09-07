@@ -4,12 +4,54 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Reddit || Demo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./pages/welcome/style.css">
+  <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
 <body>
-  <h1>Welcome here</h1>
-  <p>hellllllllllllllllllllllllllllllllllo</p>
+  
+  <nav id="nav-bar">
+    <div class="logo">
+      <img src="./images/logo.png" alt="">
+    </div>
+  
+    <div class="search-bar">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="search" name="search-reddit" placeholder="Search Reddit">
+    </div>
+  
+    <div class="user-profile">
+      <i class="fa-regular fa-user"></i>
+      <i class="fa-solid fa-angle-down"></i>
+    </div>
+  </nav>
+  
+  <section id="create-post">
+    <div class="search-bar">
+      <textarea name="create-post" id="post" rows="4" cols="30" placeholder="Create Post"></textarea>
+    </div>
+    <button type="submit" class="btn post">Post</button>
+  </section>
+  
+  <section id="posts">
+    <div class="post">
+      <div class="vote">
+        <i class="fa-solid fa-angle-up"></i>
+        <p class="votersNumber">15</p>
+        <i class="fa-solid fa-angle-down"></i>
+      </div>
+      <div class="post-body">
+        <div class="post-info">
+          <p>Posted by <strong>Hakim</strong> 9 hours ago</p>
+        </div>
+        <div class="post-content">
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, sapiente repellendus corrupti pariatur possimus porro dolorem officia ea similique. Dolorem architecto libero ut unde dolor quis accusamus? Fuga, sint aspernatur?</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script src="./script.js"></script>
+  <script src="./pages/welcome/script.js"></script>
 </body>
 </html>

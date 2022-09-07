@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600&family=Roboto:wght@100;300;400;500;700&display=swap');
+
+:root {
+  --blueTheme-color: #0079D3;
+  --blueTheme-hover: #0079d366;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #DDD;
+}
+
+input::placeholder, textarea::placeholder {
+  opacity: .7;
+}
+
+/* nav bar -------------------------- */
+#nav-bar {
+  background-color: #FFF;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#nav-bar .logo img {
+  display: block;
+  height: 4rem;
+}
+
+.search-bar {
+  background-color: #f3f3f3;
+  display: flex;
+  align-items: center;
+  width: 40%;
+  padding: .3rem;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.search-bar:hover {
+  border: .5px solid var(--blueTheme-hover);
+}
+
+.search-bar i {
+  font-size: 1.8rem;
+  padding: .3rem 0 0.3rem 1rem;
+  opacity: .65;
+  margin-right: .6rem;
+}
+
+.search-bar input, .search-bar textarea {
+  font-family: 'Noto Sans', sans-serif;
+  display: inline-block;
+  background-color: transparent;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: .5rem .5rem .5rem 0;
+  width: 100%;
+}
+
+#nav-bar .sign-section {
+  margin-right: 3rem;
+}
+
+#nav-bar .sign-section .btn {
+  font-family: 'Noto Sans', sans-serif;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1.2rem;
+  width: 10rem;
+  text-align: center;
+  padding: .3rem 0;
+  border: 2px solid var(--blueTheme-color);
+  border-radius: 2rem;
+}
+
+#nav-bar .sign-section .btn.loggin {
+  color: var(--blueTheme-color);
+}
+
+#nav-bar .sign-section .btn.loggin:hover {
+  background-color: rgba(92, 92, 236, 0.1)
+}
+
+#nav-bar .sign-section .btn.signup {
+  background-color: var(--blueTheme-color);
+  color: #FFF;
+  margin-left: 1.5rem;
+}
+
+#nav-bar .sign-section .btn.signup:hover {
+  background-color: rgba(0, 121, 211, 0.8);
+}
+
+#nav-bar .user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 2rem;
+  padding: .4rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  opacity: 0.65;
+}
+
+#nav-bar .user-profile:hover {
+  border: 1px solid var(--blueTheme-hover);
+  border-radius: 2px;
+}
+
+#nav-bar .user-profile i.fa-user {
+  font-size: 2.2rem;
+  margin-right: .5rem;
+}
+
+#create-post {
+  /* outline: 1px solid; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF;
+  width: 50%;
+  padding: 1rem;
+  margin: 3rem auto;
+  border-radius: 6px;
+}
+
+#create-post .search-bar {
+  width: 90%;
+}
+
+#create-post .btn.post {
+  font-family: 'Noto Sans', sans-serif;
+  border: 1px solid transparent;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: .8rem 1rem;
+  margin-left: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#create-post .btn.post:hover {
+  border: 1px solid var(--blueTheme-hover);
+}
+
+#posts {
+  outline: 1px solid;
+  background-color: #FFF;
+  font-weight: 500;
+  width: 50%;
+  padding: 1rem 1rem;
+  margin: 1rem auto;
+}
+
+#posts .post {
+  outline: 1px solid red;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1.5rem;
+}
