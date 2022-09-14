@@ -15,10 +15,10 @@ const handleSignupFile = (req, res) => {
 
 const userInfo = (req, res) => {
   const { username, userId } = req.user;
-  if(!(username && userId)) {
-    res.status(404).send({msg: 'User info does not exist!'})
+  if (!(username && userId)) {
+    res.status(404).send({ msg: "User info does not exist!" });
   } else {
-    res.status(200).json({username, userId});
+    res.status(200).json({ username, userId });
   }
 };
 
@@ -28,20 +28,27 @@ const handleWelcomePage = (req, res) => {
 
 const verifyTokenMiddleWare = (req, res, next) => {
   const token = req.cookies.token;
-  if(!token) {
-    return res.status(403).redirect('/login')
+  if (!token) {
+    next();
   } else {
-    verifyToken(token, process.env.SECRET_KEY).then(decoded => {
-      req.user = {
-        username: decoded.username,
-        userId: decoded.id
-      }
-      next();
-      
-    }).catch(err => {
-      return next(err);
-    })
+    verifyToken(token, process.env.SECRET_KEY)
+      .then((decoded) => {
+        req.user = {
+          username: decoded.username,
+          userId: decoded.id,
+        };
+        next();
+      })
+      .catch((err) => {
+        return next(err);
+      });
   }
-}
+};
 
-module.exports = { handleLoginFile, handleSignupFile, handleWelcomePage, verifyTokenMiddleWare, userInfo };
+module.exports = {
+  handleLoginFile,
+  handleSignupFile,
+  handleWelcomePage,
+  verifyTokenMiddleWare,
+  userInfo,
+};
