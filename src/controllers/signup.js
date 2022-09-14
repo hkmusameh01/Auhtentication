@@ -33,7 +33,6 @@ const signup = (req, res) => {
       }
     })
     .catch((err) => {
-      console.log(err);
       res.send({ msg: "Something goes wrong with signup" });
     });
 };

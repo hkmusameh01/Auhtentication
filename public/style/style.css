@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   background-color: #DDD;
 }
 
@@ -96,4 +96,131 @@ input::placeholder {
 
 #nav-bar .sign-section .btn.signup:hover {
   background-color: rgba(0, 121, 211, 0.8);
+}
+
+#posts {
+  font-weight: 500;
+  width: 65%;
+  padding: 1rem 1rem;
+  margin: 1rem auto;
+}
+
+@media screen and (max-width: 1000px) {
+  #posts {
+    width: 90%;
+  }
+}
+
+#posts .post {
+  background-color: #FFF;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 121, 211, 0.2);
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+#posts .post .vote {
+  text-align: center;
+  font-size: 1.3rem;
+  border-right: 1px solid #EEE;
+  padding: 2rem 1.3rem;
+}
+
+#posts .post .vote i {
+  cursor: pointer;
+}
+
+#posts .post .vote i:hover {
+  color: rgba(0, 121, 211, 0.4);
+}
+
+#posts .post .post-body {
+  padding: 1rem 0.8rem;
+  position: relative;
+}
+
+#posts .post-body .post-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#posts .post-body .post-info h3 {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+#posts .post-body .post-info i.fa-ellipsis {
+  text-align: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.7rem;
+  border-radius: 50%;
+  line-height: 2.5rem;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+#posts .post-body .post-info i.fa-ellipsis:hover {
+  background-color: #EEE;
+}
+
+#posts .post-body .post-content {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 1.3rem;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+#posts .post-body .post-content p {
+  line-height: 1.5;
+}
+
+#posts .post-body .post-comments {
+  font-size: 1.2rem;
+  border-bottom: 1px solid #CCC;
+  padding: 0.5rem 0 0.5rem 0.4rem;
+  cursor: pointer;
+}
+
+#posts .post-body .post-comments:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+#posts .post-body .post-comments i {
+  margin-right: .2rem;
+}
+
+#posts .post-body .comments {
+  margin-top: 0.7rem;
+}
+
+#posts .post-body .comments input {
+  background-color: #EEE;
+  font-size: 1.2rem;
+  width: 90%;
+  border-radius: 0.7rem;
+  padding: 0.6rem 1rem;
+}
+
+#posts .post-body .comments .comment {
+  background-color: #EEE;
+  max-width: 60%;
+  padding: .5rem 1rem;
+  margin-top: .5rem;
+  border-radius: 1.5rem;
+}
+
+#posts .post-body .comments .comment p {
+  padding-left: .5rem;
+  margin-top: .3rem;
+  opacity: 0.8;
+}
+
+.hidden {
+  display: none;
 }

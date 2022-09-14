@@ -49,7 +49,7 @@ signUpBtn.addEventListener("click", (e) => {
     .then((data) => {
       // console.log(data.status);
       if(data.status >= 200 && data.status < 300) {
-        window.location = '/welcomeeee'
+        window.location = '/hello'
       } else {
         return data.json()
       }
