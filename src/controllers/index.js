@@ -7,7 +7,7 @@ const {
 
 const { login, signup } = require("./authentication");
 
-const { voteFor, voteAgainst } = require("./vote");
+const { vote } = require("./vote");
 
 const {
   getAllposts,
@@ -40,7 +40,7 @@ module.exports = {
   createPost,
   deletePost,
   updatePost,
-  voteFor,
+  vote,
   addCommentForPost,
   getAllCommentsForSpesificPost,
 };

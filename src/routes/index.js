@@ -12,8 +12,7 @@ const {
   createPost,
   deletePost,
   updatePost,
-  voteFor,
-  voteAgainst,
+  vote,
   getAllposts,
   getAllCommentsForSpesificPost,
   addCommentForPost,
@@ -46,7 +45,7 @@ router.put("/post/:postId", verifyTokenMiddleWare, updatePost); // tested
 
 router.delete("/post/:postId", verifyTokenMiddleWare, deletePost); // tested
 
-router.put("/vote/:postId", verifyTokenMiddleWare, voteFor);
+router.put("/vote/:postId", verifyTokenMiddleWare, vote);
 
 router.post("/comment/:postId", verifyTokenMiddleWare, addCommentForPost);
 

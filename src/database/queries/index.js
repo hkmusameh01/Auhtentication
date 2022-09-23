@@ -1,12 +1,10 @@
 const insertUserInfo = require("./insertUserInfo");
 const selectUserByEmail = require("./selectUserByEmail");
 const {
-  voteForQuery,
-  voteAgainstQuery,
-  getVotes,
-  votesNumberFor,
-  votesNumberAgainst,
-  getSpecificPost,
+  addingUserVotingValue,
+  getPostVotesForSpesificUserById,
+  increasingVotesNumberByOne,
+  decreasingVotesNumberByOne,
 } = require("./vote");
 
 const {
@@ -30,12 +28,10 @@ module.exports = {
   getPostsForSpecificUserQuery,
   deletePostQuery,
   updatePostQuery,
-  voteForQuery,
-  voteAgainstQuery,
-  getVotes,
-  votesNumberFor,
-  votesNumberAgainst,
-  getSpecificPost,
+  addingUserVotingValue,
+  getPostVotesForSpesificUserById,
+  increasingVotesNumberByOne,
+  decreasingVotesNumberByOne,
   getAllCommentsForSpesificPostQuery,
   addCommentForPostQuery,
 };

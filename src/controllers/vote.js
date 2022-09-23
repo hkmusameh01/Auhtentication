@@ -1,28 +1,28 @@
 const {
-  voteForQuery,
-  getVotes,
-  votesNumberFor,
-  votesNumberAgainst,
+  addingUserVotingValue,
+  getPostVotesForSpesificUserById,
+  increasingVotesNumberByOne,
+  decreasingVotesNumberByOne,
 } = require("../database/queries");
 
-const voteFor = (req, res) => {
+const vote = (req, res) => {
   const {
     user: { userId },
     params: { postId },
     body: { votingNumber, type },
   } = req;
 
-  getVotes(userId, postId).then((data) => {
+  getPostVotesForSpesificUserById(userId, postId).then((data) => {
     const isVoting = data.rows[0]?.is_voting;
 
     if (type === "up" && !isVoting) {
-      voteForQuery(userId, postId, true)
-        .then(() => votesNumberFor(votingNumber, postId))
+      addingUserVotingValue(userId, postId, true)
+        .then(() => increasingVotesNumberByOne(votingNumber, postId))
         .then(() => res.status(201).send({ msg: "voted successfully!" }))
         .catch((err) => console.log(err));
     } else if (type === "up" && isVoting === true) {
-      voteForQuery(userId, postId, false)
-        .then(() => votesNumberAgainst(votingNumber, postId))
+      addingUserVotingValue(userId, postId, false)
+        .then(() => decreasingVotesNumberByOne(votingNumber, postId))
         .then(() => res.status(200).send({ msg: "updated successfully!" }))
         .catch((err) => console.log(err));
     } else if (
@@ -30,17 +30,17 @@ const voteFor = (req, res) => {
       (data.rowCount === 0 || isVoting) &&
       votingNumber > 0
     ) {
-      voteForQuery(userId, postId, false)
-        .then(() => votesNumberAgainst(votingNumber, postId))
+      addingUserVotingValue(userId, postId, false)
+        .then(() => decreasingVotesNumberByOne(votingNumber, postId))
         .then(() => res.status(201).send({ msg: "voted successfully!" }));
     } else if (type === "down" && isVoting === false && votingNumber > 2) {
       console.log("heello");
-      voteForQuery(userId, postId, true)
-        .then(() => votesNumberFor(votingNumber, postId))
+      addingUserVotingValue(userId, postId, true)
+        .then(() => increasingVotesNumberByOne(votingNumber, postId))
         .then(() => res.status(200).send({ msg: "updated successfully!" }))
         .catch((err) => console.log(err));
     }
   });
 };
 
-module.exports = { voteFor };
+module.exports = { vote };
