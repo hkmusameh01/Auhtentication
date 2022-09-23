@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const { loginSchema } = require("../validation");
-const { selectUserByEmail } = require("../database/queries");
-const { generateToken } = require("../promise");
+const { loginSchema } = require("../../validation");
+const { selectUserByEmail } = require("../../database/queries");
+const { generateToken } = require("../../promise");
 
 const login = (req, res) => {
   loginSchema

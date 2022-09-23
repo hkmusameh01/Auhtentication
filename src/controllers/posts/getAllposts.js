@@ -1,4 +1,4 @@
-const { getAllpostsQuery } = require("../database/queries");
+const { getAllpostsQuery } = require("../../database/queries");
 
 const getAllposts = (req, res) => {
   getAllpostsQuery()

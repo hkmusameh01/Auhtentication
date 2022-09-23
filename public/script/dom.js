@@ -1,6 +1,15 @@
 const postsSection = document.getElementById("posts");
+const logIn = document.getElementById("login");
+const signUp = document.getElementById("signup");
+const logOut = document.getElementById("logout");
 
-const createPostDom = ({ posts, isLogin }) => {
+if (document.cookie.split("=")[0] === "token") {
+  logIn.classList.add("hidden");
+  signUp.classList.add("hidden");
+  logOut.classList.remove("hidden");
+}
+
+const createPostDom = ({ posts }) => {
   posts.forEach((post_) => {
     const post = document.createElement("div");
     post.setAttribute("class", "post");
@@ -15,13 +24,13 @@ const createPostDom = ({ posts, isLogin }) => {
     angleDown.setAttribute("class", "fa-solid fa-angle-down");
     const votesNumber = document.createElement("p");
     votesNumber.setAttribute("class", "votesNumber");
-    votesNumber.textContent = post_.votingnumber;
+    votesNumber.textContent = post_.votes_number;
 
     angleUp.addEventListener("click", (e) => {
       const postId = +e.target.closest(".post").id;
       let voteCounter = e.target.nextSibling;
 
-      fetch(`/voteFor/${postId}`, {
+      fetch(`/vote/${postId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -30,10 +39,12 @@ const createPostDom = ({ posts, isLogin }) => {
         }),
       })
         .then((data) => {
-          if (data.status === 200) {
+          if (data.status === 201) {
             voteCounter.textContent = Number(voteCounter.textContent) + 1;
+          } else if (data.status === 200) {
+            voteCounter.textContent = Number(voteCounter.textContent) - 1;
           } else {
-            console.log("You can vote once!");
+            window.location = "/register";
           }
         })
         .catch((err) => console.log(err));
@@ -42,9 +53,8 @@ const createPostDom = ({ posts, isLogin }) => {
     angleDown.addEventListener("click", (e) => {
       const postId = e.target.closest(".post").id;
       let voteCounter = e.target.previousSibling;
-      console.log(postId);
 
-      fetch(`/voteAgainst/${postId}`, {
+      fetch(`/vote/${postId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -53,10 +63,12 @@ const createPostDom = ({ posts, isLogin }) => {
         }),
       })
         .then((data) => {
-          if (data.status === 200) {
+          if (data.status === 201) {
             voteCounter.textContent = Number(voteCounter.textContent) - 1;
+          } else if (data.status === 200) {
+            voteCounter.textContent = Number(voteCounter.textContent) + 1;
           } else {
-            console.log("You can vote once!");
+            window.location = "/register";
           }
         })
         .catch((err) => console.log(err));
@@ -81,7 +93,7 @@ const createPostDom = ({ posts, isLogin }) => {
     const postContent = document.createElement("div");
     postContent.setAttribute("class", "post-content");
     const content = document.createElement("p");
-    postContent.textContent = post_.content;
+    content.textContent = post_.content;
 
     // ------------------------
 
@@ -117,18 +129,21 @@ const createPostDom = ({ posts, isLogin }) => {
           comment: commentInput.value,
         }),
       })
-        .then((data) => data.json())
-        .then((data) => alert(data.msg))
-        .catch((err) => console.log("errrrr"));
+        .then((data) => {
+          if (data.status === 201) {
+            alert("reload to see your comment");
+          } else {
+            window.location = "/login";
+          }
+        })
+        .catch((err) => console.log(err));
 
       commentInput.value = "";
     });
 
-    console.log(post_.id);
     fetch(`/comments/${post_.id}`)
       .then((data) => data.json())
       .then((data) => createCommentDomS(data))
-      // .then(data => console.log(data))
       .catch((err) => console.log(err));
 
     const createCommentDomS = (data) => {

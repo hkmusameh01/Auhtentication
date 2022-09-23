@@ -7,13 +7,14 @@
   <title>Reddit || Demo</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./pages/welcome/style.css">
+  <link rel="stylesheet" href="./style/style.css">
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
 <body>
   
   <nav id="nav-bar">
     <div class="logo">
-      <img src="./images/logo.png" alt="">
+      <a href="/"><img src="./images/logo.png" alt=""></a>
     </div>
   
     <div class="search-bar">
@@ -21,15 +22,18 @@
       <input type="search" name="search-reddit" placeholder="Search Reddit">
     </div>
   
-    <div class="user-profile">
-      <i class="fa-regular fa-user"></i>
-      <i class="fa-solid fa-angle-down"></i>
+    <div class="profile">
+      <div class="user-profile">
+        <i class="fa-regular fa-user"></i>
+        <i class="fa-solid fa-angle-down"></i>
+      </div>
+      <a role="button" class="btn logout hidden" id="logout" href="/">Log Out</a>
     </div>
   </nav>
   
   <section id="create-post">
     <div class="search-bar">
-      <textarea name="create-post" id="post" rows="4" cols="30" placeholder="Create Post"></textarea>
+      <input name="create-post" type="text" id="post" placeholder="Create Post"></input>
     </div>
     <button type="submit" class="btn post" id="submitPost">Post</button>
     <button type="submit" class="btn post" id="updatePost">Update</button>
@@ -39,13 +43,16 @@
     <!-- <div class="post">
       <div class="vote">
         <i class="fa-solid fa-angle-up"></i>
-        <p class="votersNumber">15</p>
+        <p class="votesNumber">0</p>
         <i class="fa-solid fa-angle-down"></i>
       </div>
       <div class="post-body">
         <div class="post-info">
           <h3>Hakim</h3>
-          <i class="fa-solid fa-xmark"></i>
+          <div class="icons-container">
+            <i class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
         </div>
         <div class="post-content">
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, sapiente repellendus corrupti pariatur possimus porro dolorem officia ea similique. Dolorem architecto libero ut unde dolor quis accusamus? Fuga, sint aspernatur?</p>

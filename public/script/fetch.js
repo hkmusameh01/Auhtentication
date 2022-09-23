@@ -4,3 +4,8 @@ fetch("/posts")
     createPostDom(data);
   })
   .catch((err) => console.log(err));
+
+
+logOut.addEventListener('click', e => {
+  fetch('/logout')
+})

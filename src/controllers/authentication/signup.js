@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 
-const { insertUserInfo, selectUserByEmail } = require("../database/queries");
-const { signupSchema } = require("../validation");
-const { generateToken } = require("../promise");
+const { insertUserInfo, selectUserByEmail } = require("../../database/queries");
+const { signupSchema } = require("../../validation");
+const { generateToken } = require("../../promise");
 
 const signup = (req, res) => {
   const { password } = req.body;

@@ -29,7 +29,7 @@ const handleWelcomePage = (req, res) => {
 const verifyTokenMiddleWare = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
-    next();
+    return next({msg: 'Unauthorized User'});
   } else {
     verifyToken(token, process.env.SECRET_KEY)
       .then((decoded) => {

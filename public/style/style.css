@@ -70,21 +70,19 @@ input::placeholder {
 
 #nav-bar .sign-section .btn {
   font-family: 'Noto Sans', sans-serif;
-  display: inline-block;
   font-weight: 600;
   font-size: 1.2rem;
-  width: 10rem;
   text-align: center;
-  padding: .3rem 0;
+  padding: .3rem 3rem;
   border: 2px solid var(--blueTheme-color);
   border-radius: 2rem;
 }
 
-#nav-bar .sign-section .btn.loggin {
+#nav-bar .sign-section .btn.login {
   color: var(--blueTheme-color);
 }
 
-#nav-bar .sign-section .btn.loggin:hover {
+#nav-bar .sign-section .btn.login:hover, .btn.logout:hover {
   background-color: rgba(92, 92, 236, 0.1)
 }
 

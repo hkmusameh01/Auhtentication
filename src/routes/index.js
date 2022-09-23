@@ -15,8 +15,8 @@ const {
   voteFor,
   voteAgainst,
   getAllposts,
-  getAllComments,
-  insertComment,
+  getAllCommentsForSpesificPost,
+  addCommentForPost,
 } = require("../controllers");
 
 router.get("/login", handleLoginFile); // tested
@@ -27,26 +27,29 @@ router.post("/register", signup); // tested
 
 router.post("/login", login); // tested
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.end();
+});
+
 router.get("/hello", verifyTokenMiddleWare, handleWelcomePage);
 
 router.get("/userInfo", verifyTokenMiddleWare, userInfo);
 
-router.get('/posts', verifyTokenMiddleWare, getAllposts) //done
+router.get("/posts", getAllposts); // tested
 
-router.get('/post', verifyTokenMiddleWare, getPostsForSpecificUser)
+router.get("/post", verifyTokenMiddleWare, getPostsForSpecificUser); // tested (not sure)
 
-router.post('/post', verifyTokenMiddleWare, createPost) // done
+router.post("/post", verifyTokenMiddleWare, createPost); // tested
 
-router.delete('/post/:postId', verifyTokenMiddleWare, deletePost)
+router.put("/post/:postId", verifyTokenMiddleWare, updatePost); // tested
 
-router.put('/post/:postId', verifyTokenMiddleWare, updatePost)
+router.delete("/post/:postId", verifyTokenMiddleWare, deletePost); // tested
 
-router.put('/voteFor/:postId', verifyTokenMiddleWare, voteFor)
+router.put("/vote/:postId", verifyTokenMiddleWare, voteFor);
 
-router.put('/voteAgainst/:postId', verifyTokenMiddleWare, voteAgainst)
+router.post("/comment/:postId", verifyTokenMiddleWare, addCommentForPost);
 
-router.get('/comments/:postId', getAllComments);
-
-router.post('/comment/:postId', verifyTokenMiddleWare, insertComment)
+router.get("/comments/:postId", getAllCommentsForSpesificPost);
 
 module.exports = router;

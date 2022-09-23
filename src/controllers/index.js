@@ -1,13 +1,46 @@
-const { handleLoginFile, handleSignupFile, handleWelcomePage, verifyTokenMiddleWare, userInfo } = require("./handleFiles");
-const signup = require("./signup");
-const login = require("./login");
-const getAllposts = require('./getAllposts')
-const getPostsForSpecificUser = require('./getPostsForSpecificUser')
-const createPost = require('./insertPost')
-const deletePost = require('./deletePost')
-const updatePost = require('./updatePost')
-const {voteFor, voteAgainst} = require('./vote')
-const getAllComments = require('./getAllComments')
-const insertComment = require('./insertComment')
+const { notFoundError, serverError } = require("./errors");
 
-module.exports = { handleLoginFile, handleSignupFile, handleWelcomePage, verifyTokenMiddleWare, userInfo, signup, login, getAllposts, getPostsForSpecificUser, createPost, deletePost, updatePost, voteFor, voteAgainst, insertComment, getAllComments };
+const {
+  getAllCommentsForSpesificPost,
+  addCommentForPost,
+} = require("./comments");
+
+const { login, signup } = require("./authentication");
+
+const { voteFor, voteAgainst } = require("./vote");
+
+const {
+  getAllposts,
+  getPostsForSpecificUser,
+  createPost,
+  deletePost,
+  updatePost,
+} = require("./posts");
+
+const {
+  handleLoginFile,
+  handleSignupFile,
+  handleWelcomePage,
+  verifyTokenMiddleWare,
+  userInfo,
+} = require("./handleFiles");
+
+module.exports = {
+  notFoundError,
+  serverError,
+  handleLoginFile,
+  handleSignupFile,
+  handleWelcomePage,
+  verifyTokenMiddleWare,
+  userInfo,
+  signup,
+  login,
+  getAllposts,
+  getPostsForSpecificUser,
+  createPost,
+  deletePost,
+  updatePost,
+  voteFor,
+  addCommentForPost,
+  getAllCommentsForSpesificPost,
+};

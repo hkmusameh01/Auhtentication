@@ -104,6 +104,11 @@ input::placeholder, textarea::placeholder {
   background-color: rgba(0, 121, 211, 0.8);
 }
 
+#nav-bar .profile {
+  display: flex;
+  align-items: center;
+}
+
 #nav-bar .user-profile {
   display: flex;
   align-items: center;
@@ -126,7 +131,6 @@ input::placeholder, textarea::placeholder {
 }
 
 #create-post {
-  /* outline: 1px solid; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,7 +160,7 @@ input::placeholder, textarea::placeholder {
   border: 1px solid var(--blueTheme-hover);
 }
 
-#posts {
+/* #posts {
   outline: 1px solid;
   background-color: #FFF;
   font-weight: 500;
@@ -170,4 +174,4 @@ input::placeholder, textarea::placeholder {
   display: grid;
   grid-template-columns: auto auto;
   gap: 1.5rem;
-}
+} */

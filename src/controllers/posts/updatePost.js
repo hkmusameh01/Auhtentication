@@ -1,4 +1,4 @@
-const {updatePostQuery} = require('../database/queries');
+const {updatePostQuery} = require('../../database/queries');
 
 const updatePost = (req, res) => {
   const {params: {postId}, body: {updatedContent}} = req;

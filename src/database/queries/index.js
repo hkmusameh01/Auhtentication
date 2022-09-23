@@ -1,13 +1,26 @@
 const insertUserInfo = require("./insertUserInfo");
 const selectUserByEmail = require("./selectUserByEmail");
-const getAllpostsQuery = require('./getAllposts')
-const getPostsForSpecificUserQuery = require("./getPostsForSpecificUser");
-const insertPost = require("./insertPost");
-const deletePostQuery = require('./deletePost')
-const updatePostQuery = require('./updatePost');
-const {voteForQuery, voteAgainstQuery, getVotes, votesNumberFor, votesNumberAgainst, getSpecificPost} = require('./vote');
-const getAllCommentsQuery = require('./getAllComments')
-const insertCommentQuery = require('./insertComment')
+const {
+  voteForQuery,
+  voteAgainstQuery,
+  getVotes,
+  votesNumberFor,
+  votesNumberAgainst,
+  getSpecificPost,
+} = require("./vote");
+
+const {
+  deletePostQuery,
+  getAllpostsQuery,
+  getPostsForSpecificUserQuery,
+  insertPost,
+  updatePostQuery,
+} = require("./posts");
+
+const {
+  getAllCommentsForSpesificPostQuery,
+  addCommentForPostQuery,
+} = require("./comments");
 
 module.exports = {
   insertUserInfo,
@@ -23,6 +36,6 @@ module.exports = {
   votesNumberFor,
   votesNumberAgainst,
   getSpecificPost,
-  getAllCommentsQuery,
-  insertCommentQuery,
+  getAllCommentsForSpesificPostQuery,
+  addCommentForPostQuery,
 };

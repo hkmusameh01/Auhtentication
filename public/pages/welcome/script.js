@@ -27,8 +27,6 @@ const createPost = (data) => {
       if (data.status === 200) {
         window.location = "/hello";
         return data.json();
-      } else {
-        window.location = "/"
       }
     })
     .catch((err) => console.log(err));
@@ -41,81 +39,91 @@ submitPost.addEventListener("click", (e) => {
   fetch("/userInfo")
     .then((data) => data.json())
     .then((data) => {
-      console.log(data)
       createPost(data);
     })
     .catch((err) => console.log(err));
 });
 
 const createPostDom = ({ contents, username }) => {
-  contents.forEach((content) => {
+  contents.forEach((post_) => {
     const post = document.createElement("div");
     post.setAttribute("class", "post");
-    post.setAttribute("id", content.id);
+    post.setAttribute("id", post_.id);
+
     const vote = document.createElement("div");
     vote.setAttribute("class", "vote");
+
     const angleUp = document.createElement("i");
     angleUp.setAttribute("class", "fa-solid fa-angle-up");
-    // -------------------------------------------- voting
-    angleUp.addEventListener("click", (e) => {
-      const postId = e.target.closest(".post").id;
-      let voteCounter = e.target.nextSibling;
-      
-      fetch(`/voteFor/${postId}`, {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          votingNumber: Number(voteCounter.textContent)
-        })
-      })
-        .then(data => {
-          if(data.status === 200) {
-            voteCounter.textContent = Number(voteCounter.textContent) + 1;
-          } else {
-            console.log('You can not vote!')
-          }
-        })
-        .catch((err) => console.log(err));
-
-    });
+    const angleDown = document.createElement("i");
+    angleDown.setAttribute("class", "fa-solid fa-angle-down");
 
     const votersNumber = document.createElement("p");
     votersNumber.setAttribute("class", "votersNumber");
-    votersNumber.textContent = `${content.votingnumber}`;
-    const angleDown = document.createElement("i");
-    angleDown.setAttribute("class", "fa-solid fa-angle-down");
-    // -------------------------------------------- voting
+    votersNumber.textContent = post_.votes_number;
+
+    angleUp.addEventListener("click", (e) => {
+      const postId = +e.target.closest(".post").id;
+      let voteCounter = e.target.nextSibling;
+
+      fetch(`/vote/${postId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          votingNumber: Number(voteCounter.textContent),
+          type: "up",
+        }),
+      })
+        .then((data) => {
+          if (data.status === 201) {
+            voteCounter.textContent = Number(voteCounter.textContent) + 1;
+          } else if (data.status === 200) {
+            voteCounter.textContent = Number(voteCounter.textContent) - 1;
+          } else {
+            window.location = "/register";
+          }
+        })
+        .catch((err) => console.log(err));
+    });
+
     angleDown.addEventListener("click", (e) => {
       const postId = e.target.closest(".post").id;
       let voteCounter = e.target.previousSibling;
 
-      fetch(`/voteAgainst/${postId}`, {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
+      fetch(`/vote/${postId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          votingNumber: Number(voteCounter.textContent)
-        })
+          votingNumber: Number(voteCounter.textContent),
+          type: "down",
+        }),
       })
-        .then(data => {
-          if(data.status === 200) {
+        .then((data) => {
+          if (data.status === 201) {
             voteCounter.textContent = Number(voteCounter.textContent) - 1;
+          } else if (data.status === 200) {
+            voteCounter.textContent = Number(voteCounter.textContent) + 1;
           } else {
-            console.log('You can not vote!')
+            window.location = "/register";
           }
         })
         .catch((err) => console.log(err));
+    });
 
-    })
+    // -------------------
+
     const postBody = document.createElement("div");
     postBody.setAttribute("class", "post-body");
+
+    // ------------------
+
     const postInfo = document.createElement("div");
     postInfo.setAttribute("class", "post-info");
     const userNameH3 = document.createElement("h3");
-    userNameH3.setAttribute("class", "post-info");
-    userNameH3.textContent = `${username}`;
+    userNameH3.textContent = username;
     const xmark = document.createElement("i");
     xmark.setAttribute("class", "fa-solid fa-xmark");
-    // -------------------------------------------- DeletePost
+
     xmark.addEventListener("click", (e) => {
       const postId = e.target.closest(".post").id;
       fetch(`/post/${postId}`, { method: "DELETE" })
@@ -126,9 +134,11 @@ const createPostDom = ({ contents, username }) => {
         })
         .catch((err) => console.log(err));
     });
+
+    // -----------------------
+
     const edit = document.createElement("i");
     edit.setAttribute("class", "fa-solid fa-pen-to-square");
-    // -------------------------------------------- editPost
     edit.addEventListener("click", (e) => {
       postId = e.target.closest(".post").id;
 
@@ -137,25 +147,21 @@ const createPostDom = ({ contents, username }) => {
 
       postContainer.value = postContent.textContent;
     });
-    const postContentContainer = document.createElement("div");
-    postContentContainer.setAttribute("class", "post-content");
-    const postContent = document.createElement("p");
-    postContent.textContent = `${content.content}`;
-    const comments = document.createElement("div");
-    comments.setAttribute("class", "comments");
-    const commentIcon = document.createElement("i");
-    commentIcon.setAttribute("class", "fa-regular fa-comment");
-    const commentsSpan = document.createElement("span");
 
-    comments.append(commentIcon);
-    comments.append(commentsSpan);
-    postContentContainer.append(postContent);
+    // ------------------
+    const postContent = document.createElement("div");
+    postContent.setAttribute("class", "post-content");
+    const content = document.createElement("p");
+    content.textContent = post_.content;
+
+    // --------------------
+
+    postContent.append(content);
     postInfo.append(userNameH3);
     postInfo.append(xmark);
     postInfo.append(edit);
     postBody.append(postInfo);
-    postBody.append(postContent);
-    postBody.append(comments);
+    postBody.append(content);
     vote.append(angleUp);
     vote.append(votersNumber);
     vote.append(angleDown);
@@ -166,12 +172,9 @@ const createPostDom = ({ contents, username }) => {
 };
 
 fetch("/post")
-  .then(data => {
-    console.log(data.status);
-    if(data.status === 200) {
-      return data.json()
-    } else {
-      window.location = '/'
+  .then((data) => {
+    if (data.status === 200) {
+      return data.json();
     }
   })
   .then((data) => createPostDom(data))
